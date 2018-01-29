@@ -5,22 +5,9 @@
 
 
 #Unity
-[Ss]piderAdventure/Library
-[Ss]piderAdventure/Temp
-[Ss]piderAdventure/UnityPackageManager
-[Ss]piderAdventure/Library
-[Ss]piderAdventure/Temp
-[Ss]piderAdventure/UnityPackageManager
-
-[Ss]pidy/the_adventures_of_spidy/Library
-[Ss]pidy/the_adventures_of_spidy/Temp
-[Ss]pidy/the_adventures_of_spidy/UnityPackageManager
-[Ss]pidy/the_adventures_of_spidy/Library
-[Ss]Spidy/the_adventures_of_spidy/Temp
-[Ss]Spidy/the_adventures_of_spidy/UnityPackageManager
-
-
-
+[Ii]KTemplate/Library
+[Ii]KTemplate/Temp
+[Ii]KTemplate/UnityPackageManager
 *.csproj
 *.sln
 
