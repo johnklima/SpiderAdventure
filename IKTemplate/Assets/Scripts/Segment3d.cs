@@ -8,7 +8,7 @@ public class Segment3d : MonoBehaviour
     public Vector3 Apos = new Vector3(0, 0, 0);
     public Vector3 Bpos = new Vector3(0, 0, 0);
 
-    protected float length = 0;
+    public float length = 0;
 
     public Segment3d parent = null;
     public Segment3d child = null;
@@ -16,7 +16,7 @@ public class Segment3d : MonoBehaviour
     public float interpRate = 3;
 
     private IKSystem3d parentSystem;    
-    private float twist;
+    
 
     public bool useInterpolation = true;
     public bool useConstraints = true;
@@ -53,7 +53,7 @@ public class Segment3d : MonoBehaviour
     {
         length = transform.GetChild(0).localScale.z;
         updateSegment();
-        //update its children (from toe to hips)
+        //update its children
         if (child)
             child.updateSegmentAndChildren();
 
@@ -80,7 +80,8 @@ public class Segment3d : MonoBehaviour
     }
 
     void calculateBpos()
-    {   
+    {
+        length = transform.GetChild(0).localScale.z; //make sure my length is always fresh
         Bpos = Apos + transform.forward * length;
     }
     
@@ -94,7 +95,7 @@ public class Segment3d : MonoBehaviour
 
 
 
-        Quaternion a = transform.localRotation;                 //save current local rotation       
+        Quaternion a = transform.rotation;                 //save current local rotation       
 
         Quaternion b = FindLookAt(target);                      //look at the target point
 
@@ -111,14 +112,14 @@ public class Segment3d : MonoBehaviour
 
 
             //set rotation back to start position
-            transform.localRotation = a;
+            transform.rotation = a;
 
             //spherical interpolate
             float t = Time.deltaTime;
             Quaternion c = Quaternion.Slerp(a, b, t * ir);
             
 
-            transform.localRotation = c;
+            transform.rotation = c;
 
 
         }
@@ -182,7 +183,7 @@ public class Segment3d : MonoBehaviour
             //compose 3 individual angles, x , y, z on each plane
             Quaternion prot = Quaternion.identity;
             if (parent)
-                prot = parent.gameObject.transform.localRotation;
+                prot = parent.gameObject.transform.rotation;
 
             //start by total reset of rotations
             transform.rotation = Quaternion.identity ;
