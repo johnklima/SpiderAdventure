@@ -9,6 +9,7 @@ TagManager:
   - GrapObjects
   - Targets
   - Boundary
+  - testwall
   layers:
   - Default
   - TransparentFX

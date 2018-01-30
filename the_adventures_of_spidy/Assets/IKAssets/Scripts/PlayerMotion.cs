@@ -198,14 +198,14 @@ public class PlayerMotion : MonoBehaviour {
 
         //move the player //Andreas: Diabled atm..
         //transform.position += velocity * Time.deltaTime;
-
+        /*
         //Andreas:
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * 15.0f;
         var z = Input.GetAxis("Vertical") * Time.deltaTime * 15.0f;
 
         //transform.Rotate(0, x, 0);
         transform.Translate(x, 0, z);
-
+        */
 
 
 
@@ -275,7 +275,7 @@ public class PlayerMotion : MonoBehaviour {
     }
 
 
-    private static Vector3 rayoffset = new Vector3(0, 3, 0);
+    private static Vector3 rayoffset = new Vector3(0, 1, 0);
     bool handleTerrain()
     {
 
@@ -290,7 +290,7 @@ public class PlayerMotion : MonoBehaviour {
 
         isOnPlatform = false;
 
-        if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 100, layerMask))
+        if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 10, layerMask))
         {
 
             h = hit.point.y;
@@ -349,11 +349,15 @@ public class PlayerMotion : MonoBehaviour {
         }
 
 
-        Debug.Log("OnTriggerEnter " + other.name);
+        Debug.Log("MY    OnTriggerEnter " + other.name);
         //transform.position = lastGoodPosition; //Andreas: Removed this
-        
-        //TODO: improve collision handling        
-        velocity *= -1;           //bounce
+
+
+        if (other.gameObject.tag == "testwall")
+        {
+            //TODO: improve collision handling        
+            velocity *= -2;           //bounce
+        }
     }
 
 
