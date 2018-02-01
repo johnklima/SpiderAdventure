@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/spidy2.unity
+- path: Assets/AnimationLevels/Ole-Kristian/OleKristianAnimationLevel.unity
   isLoaded: 1
   isActive: 1
