@@ -37,6 +37,21 @@ public class SpiderMovement : MonoBehaviour
     public AudioClip CoinSound;
     public GameObject MainCam;
 
+    //From PlayerMotion
+    //gravity in meters per second per second
+    static float GRAVITY_CONSTANT = -9.8f;                      // -- for earth,  -1.6 for moon 
+    static float MAX_WIND_CONSTANT = 10.0f;
+
+
+    public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
+    public Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
+    public Vector3 moveForce = new Vector3(0, 0, 0);            //combined force of all axis from input for move
+    public Vector3 totalForce = new Vector3(0, 0, 0);           //total of ALL forces applied
+    private Vector3 gravityNull = new Vector3(1, 0, 1);
+    public float mass = 1.0f;
+    public float friction = 0.975f;                      //TODO: put into world property
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -52,8 +67,30 @@ public class SpiderMovement : MonoBehaviour
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * 15.0f;
         var z = Input.GetAxis("Vertical") * Time.deltaTime * 15.0f;
 
-        float movementSpeed = 13f;
+        transform.Translate(x, 0, z);
 
+        float movementSpeed = 103f;
+
+
+
+        //Handle movement - START
+        totalForce *= GRAVITY_CONSTANT;
+
+        acceleration = totalForce / mass;
+        velocity += acceleration * Time.deltaTime;
+
+        transform.position += velocity * Time.deltaTime;
+    
+        //decay velocity
+        float y = velocity.y;
+        velocity *= friction;
+        velocity.Set(velocity.x, y, velocity.z);
+        //Handle movement - END
+
+
+        //transform.position += new Vector3(x * movementSpeed * Time.deltaTime, 0, z * movementSpeed * Time.deltaTime);
+
+        /*
         if (!stopRight) { 
             if (Input.GetKey(KeyCode.D)) //Right
             {
@@ -89,7 +126,9 @@ public class SpiderMovement : MonoBehaviour
         {
             SceneManager.LoadScene(0); //Andreas: I added this for debug purposes 
             Cursor.visible = true;
-        }
+        }*/
+
+        HandleGround();
 
 
         yaw += speedH * Input.GetAxis("Mouse X");
@@ -98,6 +137,29 @@ public class SpiderMovement : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
 
         transform.position = this.transform.position;
+
+
+    }
+
+    void HandleGround()
+    {
+        RaycastHit hit;
+
+        float m_MaxRay = 1.1f;
+        Ray m_Ray = new Ray(transform.position, -transform.up);
+        if (Physics.Raycast(m_Ray, m_MaxRay))
+        //if (Physics.Raycast(transform.position, -transform.up, out hit, m_MaxRay, 4))
+        //if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxdistance, cullingmask))
+        {
+
+            Debug.Log("IS ON GROUND");
+        }
+        else
+        {
+            Debug.Log("NOT ON GROUND");
+            velocity *= -1;
+            transform.position -= new Vector3(0, 20 * Time.deltaTime, 0);
+        }
 
 
     }
@@ -125,32 +187,6 @@ public class SpiderMovement : MonoBehaviour
         
         stopTop = Physics.Raycast(transform.position, Vector3.forward, sideOffsets);
         stopDown = Physics.Raycast(transform.position, Vector3.back, sideOffsets);
-
-
-
-        float m_MaxRay = 1.1f;
-   
-        Ray m_Ray = new Ray(transform.position, -transform.up);
-
-
-
-        if (Physics.Raycast(m_Ray, m_MaxRay))
-        //if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxdistance, cullingmask))
-        {   
-
-            Debug.Log("IS ON GROUND");
-        }
-        else
-        {
-            Debug.Log("NOT ON GROUND");
-            transform.position -= new Vector3(0, 20 * Time.deltaTime, 0);
-        }
-
-
-
-
-
-
 
 
 
@@ -196,6 +232,13 @@ public class SpiderMovement : MonoBehaviour
         {
             FindObjectOfType<GameManager>().EndGame();
 
+
+        }
+
+        if (other.gameObject.tag == "testwall")
+        {
+            //TODO: improve collision handling        
+            //velocity *= -2;           //bounce 2 = default
 
         }
 

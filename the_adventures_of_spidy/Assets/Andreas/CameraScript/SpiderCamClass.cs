@@ -37,7 +37,6 @@ public class SpiderCamClass : MonoBehaviour
 
         float ClampValXMin = 65.0F; // UP
         float ClampValXMax = 35.0F; // DOWN
-        float ClampValY = 360.0F;
 
         yaw += speedH * Input.GetAxis("Mouse X");
         pitch -= speedV * Input.GetAxis("Mouse Y");

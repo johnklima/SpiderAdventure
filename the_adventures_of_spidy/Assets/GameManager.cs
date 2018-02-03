@@ -36,11 +36,13 @@ public class GameManager : MonoBehaviour {
     {
         if(gameHasEnded == false)
         {
-            gameHasEnded = true;
             Debug.Log("GameOver");
-            Restart();
-            //Invoke("Restart", restartDelay);
-            
+            gameHasEnded = true;
+            gameoverUI.SetActive(true);
+            Cursor.visible = true;
+            //Restart(); - Old function
+            //Invoke("Restart", restartDelay); - Game over after duration?
+
         }
     }
 
@@ -65,8 +67,8 @@ public class GameManager : MonoBehaviour {
 
     void Restart()
     {
-        gameoverUI.SetActive(true);
-        Cursor.visible = true;
+        //gameoverUI.SetActive(true);
+        //Cursor.visible = true;
         //Time.timeScale = 0;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

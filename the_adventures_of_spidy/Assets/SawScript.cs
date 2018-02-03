@@ -32,10 +32,10 @@ public class SawScript : MonoBehaviour {
 
         if (canMove)
         {
-            //transform.position = _startPosition + new Vector3(Mathf.Sin(Time.time * moveSpeed) * 2 , 0.0f, 0.0f);
-            //transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
+            //transform.position = _startPosition + new Vector3(Mathf.Sin(Time.time * moveSpeed) * 2 , 0.0f, 0.0f); - old test code
+            //transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z); - old test code
 
-            if (vertical == false)
+            if (vertical == false) // Horizontal
             {
                 if (reverse == false)
                 {
@@ -46,7 +46,7 @@ public class SawScript : MonoBehaviour {
                     transform.position = new Vector3(-Mathf.PingPong(Time.time * moveSpeed, max - min) + min, transform.position.y, transform.position.z);
                 }
 
-            }else if (vertical == true) {
+            }else if (vertical == true) { //Vertical
                 if (reverse == false)
                 {
                     transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time * moveSpeed, max - min) + min, transform.position.z);

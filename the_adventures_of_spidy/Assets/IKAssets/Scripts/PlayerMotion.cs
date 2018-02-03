@@ -68,6 +68,8 @@ public class PlayerMotion : MonoBehaviour {
     private AudioSource Source;
     public AudioClip CoinSound;
 
+    public GameObject MainCam;
+
     // Use this for initialization
     void Start ()
     {
@@ -102,7 +104,7 @@ public class PlayerMotion : MonoBehaviour {
         if (isOutOfBounds(isOnSurface) == false)
         {
             //all good so buffer last good position
-            lastGoodPosition = transform.position;
+            //lastGoodPosition = transform.position;
 
             //all good so do key input and movement
             handleInput();
@@ -130,36 +132,106 @@ public class PlayerMotion : MonoBehaviour {
 
     void handleInput()
     {
-        
+
+        float inputSpeed = 30.0f;
+
         //clear out the move force each frame
         moveForce *= 0;
         Debug.Log("handle movement");
 
-        if (Input.GetKey(KeyCode.S) && energy > 0.0f)
-        {
-            moveForce.z = -lateralForce;
-            energy -= consumption * Time.deltaTime;
 
-        }
-        
+        //### ANDREAS - CUSTOM MOVEMENT ###//
+
+        //Move Forward via Input, also checks for energy (might not use energy)
+        //Andreas
         if (Input.GetKey(KeyCode.W) && energy > 0.0f)
         {
-            moveForce.z = lateralForce;
-            energy -= consumption * Time.deltaTime;
+            //this was the original code by John
+            //moveForce.z = lateralForce;
 
+            //Getting transform.forward vector from MainCamera
+            Vector3 forwardVector = MainCam.transform.forward;
+
+            //Limiting directions - Should probably not use "new", but it works!
+            Vector3 forwardVectorFinal = new Vector3(forwardVector.x, 0, forwardVector.z);
+
+            //Taking forwardVector and multiplying with my local float variable (todo: make public)
+            moveForce = forwardVectorFinal * inputSpeed;
+
+            // - I still keep this, might become useful
+            energy -= consumption * Time.deltaTime;
         }
 
-        
+        //Move Back via Input, also checks for energy (might not use energy)
+        //Andreas
+        if (Input.GetKey(KeyCode.S) && energy > 0.0f)
+        {
+            //this was the original code by John
+            //moveForce.z = -lateralForce;
+
+            //Getting transform.forward vector from MainCamera - subtracting to get "back"
+            Vector3 backVector = -MainCam.transform.forward;
+
+            //Limiting directions - Should probably not use "new", but it works!
+            Vector3 backVectorFinal = new Vector3(backVector.x, 0, backVector.z);
+
+            //Taking forwardVector and multiplying with my local float variable (todo: make public)
+            moveForce = backVectorFinal * inputSpeed;
+
+            // - I still keep this, might become useful
+            energy -= consumption * Time.deltaTime;
+        }
+
+
+        //Move Left via Input, also checks for energy (might not use energy)
+        //Andreas
         if (Input.GetKey(KeyCode.A) && energy > 0.0f)
         {
-            moveForce.x = -lateralForce;
-            energy -= consumption * Time.deltaTime;
+            //this was the original code by John
+            //moveForce.x = -lateralForce;
 
+            //Getting transform.right vector from MainCamera, subtracting to get "left"
+            Vector3 leftVector = -MainCam.transform.right;
+
+            //Limiting directions - Should probably not use "new", but it works!
+            Vector3 leftVectorFinal = new Vector3(leftVector.x, 0, leftVector.z); 
+            
+            //Taking leftVector and multiplying with my local float variable (todo: make public)
+            moveForce = leftVectorFinal * inputSpeed;
+
+            // - I still keep this, might become useful
+            energy -= consumption * Time.deltaTime;
         }
 
+
+        //Move Right via Input, also checks for energy (might not use energy)
+        //Andreas
         if (Input.GetKey(KeyCode.D) && energy > 0.0f)
         {
-            moveForce.x = lateralForce;
+            //this was the original code by John
+            //moveForce.x = lateralForce;
+
+            //Getting transform.right vector from MainCamera
+            Vector3 rightVector = MainCam.transform.right;
+
+            //Limiting directions - Should probably not use "new", but it works!
+            Vector3 rightVectorFinal = new Vector3(rightVector.x, 0, rightVector.z);
+
+            //Taking leftVector and multiplying with my local float variable (todo: make public)
+            moveForce = rightVectorFinal * inputSpeed;
+
+            // - I still keep this, might become useful
+            energy -= consumption * Time.deltaTime;
+        }
+
+
+
+        if (Input.GetKey(KeyCode.D) && energy > 0.0f) //RIGHT
+        {
+            //moveForce.x = lateralForce;
+
+            Vector3 rightVector = MainCam.transform.right;
+            moveForce = rightVector * inputSpeed;
             energy -= consumption * Time.deltaTime;
 
         }
@@ -191,6 +263,7 @@ public class PlayerMotion : MonoBehaviour {
 
         //TODO: reenable later
         //totalForce += windForce;
+        //totalForce.Set(Vector3.forward);
         
         
         acceleration = totalForce / mass;
@@ -216,6 +289,7 @@ public class PlayerMotion : MonoBehaviour {
         float y = velocity.y;
         velocity *= friction;
         velocity.Set(velocity.x, y, velocity.z);
+
         
     }
 
@@ -232,11 +306,12 @@ public class PlayerMotion : MonoBehaviour {
 
             Debug.Log("not on surface???");
 
-            transform.position = lastGoodPosition;
+            //transform.position = lastGoodPosition;
 
             //TODO: angle of incidence == angle of refraction, assume perpendicular plane 
-            velocity *= -1;
-            ret = true;
+            //velocity *= -1;
+           // ret = true;
+           //Andreas - this fixed my issue :D
         }
         else
         {
@@ -293,15 +368,21 @@ public class PlayerMotion : MonoBehaviour {
         if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 10, layerMask))
         {
 
-            h = hit.point.y;
+            if (hit.collider.gameObject.CompareTag("Ground"))
+            {
 
-            hillPolyNorm = hit.normal;
-            hillForceDir = Vector3.Cross(hillPolyNorm, Vector3.right);
-            hillAngle = Vector3.SignedAngle(hillPolyNorm, Vector3.up, Vector3.right);
+                h = hit.point.y;
 
-            //the force the hill apply from 0-1 max
-            float hillForce = (hillAngle / 90) * hillFactor;
-            hillForceDir *= hillForce;
+                hillPolyNorm = hit.normal;
+                hillForceDir = Vector3.Cross(hillPolyNorm, Vector3.right);
+                hillAngle = Vector3.SignedAngle(hillPolyNorm, Vector3.up, Vector3.right);
+
+                //the force the hill apply from 0-1 max
+                float hillForce = (hillAngle / 90) * hillFactor;
+                hillForceDir *= hillForce;
+
+
+            }
            
             
         }
@@ -314,6 +395,7 @@ public class PlayerMotion : MonoBehaviour {
 
         terrainHeight = h + groundOffset;
 
+        //Andreas .. debug this
         //ensure I am NEVER below the surface
         if (transform.position.y <= terrainHeight)
         {
@@ -336,7 +418,7 @@ public class PlayerMotion : MonoBehaviour {
         if (other.gameObject.CompareTag("PickupItem"))
         {
             other.gameObject.SetActive(false);
-            //Destroy(other.gameObject);
+            //Destroy(other.gameObject); - Not using this
             Source.PlayOneShot(CoinSound, 1f);
             score = score + 100;
             SetScoreText();
@@ -353,10 +435,21 @@ public class PlayerMotion : MonoBehaviour {
         //transform.position = lastGoodPosition; //Andreas: Removed this
 
 
-        if (other.gameObject.tag == "testwall")
+        //if (other.gameObject.tag == "testwall") - 
+        if (other.gameObject.CompareTag("testwall"))
         {
+
+            //Vector3 bounceVector = new Vector3(velocity.x, velocity.y, velocity.z);
+            velocity.x *= -2;
+            velocity.y *= -0.2f;
+            velocity.z *= -2;
+
+            //if (other.gameObject.transform.position.y + other.gameObject.transform.localScale.y > transform.position.y) //Andreas: added this so it does not bounce on top
+            //{
+            //velocity *= -2;           //bounce 2 = default
+            //}
             //TODO: improve collision handling        
-            velocity *= -2;           //bounce
+            //velocity *= -2;           //bounce 2 = default
         }
     }
 

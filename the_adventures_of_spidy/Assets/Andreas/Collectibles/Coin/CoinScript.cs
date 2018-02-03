@@ -19,6 +19,6 @@ public class CoinScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(speed * Time.deltaTime, 0, 0);
+        transform.Rotate(speed * Time.deltaTime, 0, 0); //Time.deltaTime is important for different framerates
     }
 }
