@@ -6073,6 +6073,7 @@ GameObject:
   - component: {fileID: 365288331}
   - component: {fileID: 365288330}
   - component: {fileID: 365288329}
+  - component: {fileID: 365288334}
   m_Layer: 0
   m_Name: targetLegLeft
   m_TagString: Untagged
@@ -6099,13 +6100,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 365288327}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20c3de3b7d93f084dbdc734cc02bc2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 10
-  amplitude: 0.2
+  amplitude: 4
   phase: 0
   rotSpeed: 10
 --- !u!114 &365288330
@@ -6172,6 +6173,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 365288327}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &365288334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 365288327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7dabea654d07458d72b7eb2f7d291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 10
+  amplitude: 4
+  reverse: 0
+  yForce: 1
+  rotSpeed: 0.4
 --- !u!1001 &374475993
 Prefab:
   m_ObjectHideFlags: 0
@@ -7958,6 +7975,7 @@ GameObject:
   - component: {fileID: 494508024}
   - component: {fileID: 494508023}
   - component: {fileID: 494508022}
+  - component: {fileID: 494508028}
   m_Layer: 0
   m_Name: targetLegLeft
   m_TagString: Untagged
@@ -7984,13 +8002,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 494508020}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6ced7eb7ce581f48a10df4bc208ed04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 10
-  amplitude: 0.2
+  amplitude: 4
   phase: 0
   rotSpeed: 0.4
 --- !u!114 &494508023
@@ -8072,6 +8090,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 494508020}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &494508028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494508020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7dabea654d07458d72b7eb2f7d291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 10
+  amplitude: 4
+  reverse: 0
+  yForce: 1
+  rotSpeed: 0.4
 --- !u!1001 &507053632
 Prefab:
   m_ObjectHideFlags: 0
@@ -8247,6 +8281,7 @@ GameObject:
   - component: {fileID: 510944049}
   - component: {fileID: 510944048}
   - component: {fileID: 510944047}
+  - component: {fileID: 510944052}
   m_Layer: 0
   m_Name: targetLegLeft
   m_TagString: Untagged
@@ -8273,13 +8308,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 510944045}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20c3de3b7d93f084dbdc734cc02bc2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 10
-  amplitude: 0.2
+  amplitude: 4
   phase: 1
   rotSpeed: 10
 --- !u!114 &510944048
@@ -8346,6 +8381,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 510944045}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &510944052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 510944045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7dabea654d07458d72b7eb2f7d291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 10
+  amplitude: 4
+  reverse: 1
+  yForce: 1
+  rotSpeed: 0.4
 --- !u!1001 &514843235
 Prefab:
   m_ObjectHideFlags: 0
@@ -9780,6 +9831,7 @@ GameObject:
   - component: {fileID: 575409365}
   - component: {fileID: 575409364}
   - component: {fileID: 575409363}
+  - component: {fileID: 575409369}
   m_Layer: 0
   m_Name: targetLegLeft
   m_TagString: Untagged
@@ -9806,13 +9858,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 575409361}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6ced7eb7ce581f48a10df4bc208ed04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 10
-  amplitude: 0.2
+  amplitude: 4
   phase: 0
   rotSpeed: 0.4
 --- !u!114 &575409364
@@ -9894,6 +9946,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 575409361}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &575409369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 575409361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7dabea654d07458d72b7eb2f7d291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 10
+  amplitude: 4
+  reverse: 0
+  yForce: 1
+  rotSpeed: 0.4
 --- !u!1001 &575978593
 Prefab:
   m_ObjectHideFlags: 0
@@ -12835,7 +12903,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 760925337}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -13140,7 +13208,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 779929092}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -14068,7 +14136,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 820477945}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -18719,7 +18787,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1080061753}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -20145,7 +20213,7 @@ MonoBehaviour:
   speedV: 2
   killUnderY: -35
   scoreText: {fileID: 1764384020}
-  CoinSound: {fileID: 0}
+  CoinSound: {fileID: 8300000, guid: 8eee64c419157a94d82300886f19dd8b, type: 3}
   MainCam: {fileID: 963820939}
 --- !u!65 &1181257225
 BoxCollider:
@@ -23355,6 +23423,7 @@ GameObject:
   - component: {fileID: 1380829130}
   - component: {fileID: 1380829129}
   - component: {fileID: 1380829128}
+  - component: {fileID: 1380829133}
   m_Layer: 0
   m_Name: targetLegLeft
   m_TagString: Untagged
@@ -23381,13 +23450,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1380829126}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20c3de3b7d93f084dbdc734cc02bc2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 10
-  amplitude: 0.2
+  amplitude: 4
   phase: 1
   rotSpeed: 10
 --- !u!114 &1380829129
@@ -23454,6 +23523,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1380829126}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1380829133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1380829126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7dabea654d07458d72b7eb2f7d291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 10
+  amplitude: 4
+  reverse: 1
+  yForce: 1
+  rotSpeed: 0.4
 --- !u!1001 &1381193721
 Prefab:
   m_ObjectHideFlags: 0
@@ -27000,6 +27085,7 @@ GameObject:
   - component: {fileID: 1559213417}
   - component: {fileID: 1559213416}
   - component: {fileID: 1559213415}
+  - component: {fileID: 1559213421}
   m_Layer: 0
   m_Name: targetLegLeft
   m_TagString: Untagged
@@ -27026,13 +27112,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1559213413}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6ced7eb7ce581f48a10df4bc208ed04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 10
-  amplitude: 0.2
+  amplitude: 4
   phase: 1
   rotSpeed: 0.4
 --- !u!114 &1559213416
@@ -27114,6 +27200,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1559213413}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1559213421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1559213413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7dabea654d07458d72b7eb2f7d291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 10
+  amplitude: 4
+  reverse: 1
+  yForce: 1
+  rotSpeed: 0.4
 --- !u!1001 &1560001138
 Prefab:
   m_ObjectHideFlags: 0
