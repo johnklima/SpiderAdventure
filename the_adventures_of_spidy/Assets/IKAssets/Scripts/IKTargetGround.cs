@@ -5,7 +5,7 @@ using UnityEngine;
 public class IKTargetGround : MonoBehaviour {
 
 
-    private static Vector3 rayoffset = new Vector3(0, 3, 0);
+    private static Vector3 rayoffset = new Vector3(0, 6, 0); //3 is default
     private static int GROUND_LAYER = 1 << 8;
 
 
@@ -25,7 +25,7 @@ public class IKTargetGround : MonoBehaviour {
         raycastPoint += rayoffset;
 
         
-        if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 100, layerMask))
+        if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 100, layerMask)) //100 is default
         {
 
             h = hit.point.y;

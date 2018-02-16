@@ -133,7 +133,7 @@ public class PlayerMotion : MonoBehaviour {
     void handleInput()
     {
 
-        float inputSpeed = 30.0f;
+        float inputSpeed = 2600.0f; //30
 
         //clear out the move force each frame
         moveForce *= 0;
@@ -156,7 +156,7 @@ public class PlayerMotion : MonoBehaviour {
             Vector3 forwardVectorFinal = new Vector3(forwardVector.x, 0, forwardVector.z);
 
             //Taking forwardVector and multiplying with my local float variable (todo: make public)
-            moveForce = forwardVectorFinal * inputSpeed;
+            moveForce = forwardVectorFinal * inputSpeed * Time.deltaTime;
 
             // - I still keep this, might become useful
             energy -= consumption * Time.deltaTime;
@@ -176,7 +176,7 @@ public class PlayerMotion : MonoBehaviour {
             Vector3 backVectorFinal = new Vector3(backVector.x, 0, backVector.z);
 
             //Taking forwardVector and multiplying with my local float variable (todo: make public)
-            moveForce = backVectorFinal * inputSpeed;
+            moveForce = backVectorFinal * inputSpeed * Time.deltaTime;
 
             // - I still keep this, might become useful
             energy -= consumption * Time.deltaTime;
@@ -197,7 +197,7 @@ public class PlayerMotion : MonoBehaviour {
             Vector3 leftVectorFinal = new Vector3(leftVector.x, 0, leftVector.z); 
             
             //Taking leftVector and multiplying with my local float variable (todo: make public)
-            moveForce = leftVectorFinal * inputSpeed;
+            moveForce = leftVectorFinal * inputSpeed * Time.deltaTime;
 
             // - I still keep this, might become useful
             energy -= consumption * Time.deltaTime;
@@ -218,7 +218,7 @@ public class PlayerMotion : MonoBehaviour {
             Vector3 rightVectorFinal = new Vector3(rightVector.x, 0, rightVector.z);
 
             //Taking leftVector and multiplying with my local float variable (todo: make public)
-            moveForce = rightVectorFinal * inputSpeed;
+            moveForce = rightVectorFinal * inputSpeed * Time.deltaTime;
 
             // - I still keep this, might become useful
             energy -= consumption * Time.deltaTime;
@@ -226,7 +226,7 @@ public class PlayerMotion : MonoBehaviour {
 
 
 
-        if (Input.GetKey(KeyCode.D) && energy > 0.0f) //RIGHT
+        /*if (Input.GetKey(KeyCode.D) && energy > 0.0f) //RIGHT
         {
             //moveForce.x = lateralForce;
 
@@ -234,7 +234,7 @@ public class PlayerMotion : MonoBehaviour {
             moveForce = rightVector * inputSpeed;
             energy -= consumption * Time.deltaTime;
 
-        }
+        }*/
         
     }
 
@@ -279,10 +279,12 @@ public class PlayerMotion : MonoBehaviour {
         //transform.Rotate(0, x, 0);
         transform.Translate(x, 0, z);
         */
+        float maxForward = 20;
+  
+        velocity = Vector3.ClampMagnitude(velocity, maxForward);
 
 
-
-        transform.position += velocity * Time.deltaTime;
+       transform.position += velocity * Time.deltaTime;
 
 
         //decay velocity

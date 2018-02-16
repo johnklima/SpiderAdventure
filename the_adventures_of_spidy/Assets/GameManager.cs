@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
+        /*
         if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour {
         else if (instance != this)
         {
             Destroy(gameObject);
-        }
+        }*/
     }
 
     public void CompleteLevel ()

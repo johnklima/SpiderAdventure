@@ -30,8 +30,8 @@ public class AnimateTargetLegLeft    : MonoBehaviour {
 	void Update () {
 
         //transform.localEulerAngles = new Vector3(startingRotation.x, 0, verticalOffset + -Mathf.PingPong(_tempTime * rotSpeed, rot));
-
-        _tempTime += Time.deltaTime * 10;
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) { 
+            _tempTime += Time.deltaTime * 10;
 
         //float z = 0;//Mathf.Sin( (localTime + phase) * frequency) * amplitude;
         float z = Mathf.Sin( (localTime + phase) * frequency) * amplitude;
@@ -47,5 +47,16 @@ public class AnimateTargetLegLeft    : MonoBehaviour {
 
         //accumulate our own local time to this object
         localTime += Time.deltaTime;
-	}
+        }
+        else
+        {
+            //float z = Mathf.Sin((localTime + phase) * frequency) * amplitude;
+            //float y = Mathf.Sin((localTime + phase) * frequency) * amplitude;
+            curT.Set(0.0f, 0.0f, 0.0f);
+
+            transform.localPosition = curT;
+
+            transform.eulerAngles = new Vector3(10, 90, 0);
+        }
+    }
 }

@@ -31,7 +31,7 @@ public class AnimateTargetLegs_AN : MonoBehaviour
     void Update()
     {
         //Check for movement
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             controlSpiderFeet();
            
     }
@@ -58,7 +58,10 @@ public class AnimateTargetLegs_AN : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 90, 0);
 
         //Add time
-        localTime += Time.deltaTime;
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            localTime += Time.deltaTime;
+        else
+            localTime = 0;
     }
 
 
